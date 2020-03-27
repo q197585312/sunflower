@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.google.samples.apps.sunflower.viewmodels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.samples.apps.sunflower.data.User
 
 class UserProfileViewModel : ViewModel() {
-       val userId : String = "1"
-       val user : User = User("xxx","name","last")
+    val userId: String = "1"
+    val liveUser: LiveData<User> = MutableLiveData<User>(User("xxx", "name", "last"))
 }

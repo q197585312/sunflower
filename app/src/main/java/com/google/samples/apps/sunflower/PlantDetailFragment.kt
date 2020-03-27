@@ -25,7 +25,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.app.ShareCompat
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -39,7 +38,7 @@ import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModel
 /**
  * A fragment representing a single Plant detail screen.
  */
-class PlantDetailFragment : Fragment() {
+class PlantDetailFragment : BaseFragment() {
 
     private val args: PlantDetailFragmentArgs by navArgs()
 

@@ -20,17 +20,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.samples.apps.sunflower.adapters.GardenPlantingAdapter
 import com.google.samples.apps.sunflower.adapters.PLANT_LIST_PAGE_INDEX
+import com.google.samples.apps.sunflower.adapters.SimpleBaseBindingAdapter
+import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
+import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
+import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModel
+import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
 
-class GardenFragment : Fragment() {
+class GardenFragment : BaseFragment() {
 
     private lateinit var binding: FragmentGardenBinding
 
@@ -44,7 +49,15 @@ class GardenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGardenBinding.inflate(inflater, container, false)
-        val adapter = GardenPlantingAdapter()
+//        val adapter = GardenPlantingAdapter()
+        val adapter=object : SimpleBaseBindingAdapter<PlantAndGardenPlantings,ListItemGardenPlantingBinding>(context,R.layout.list_item_garden_planting){
+            override fun onSimpleBindItem(binding: ListItemGardenPlantingBinding?, item: PlantAndGardenPlantings, holder: RecyclerView.ViewHolder?) {
+                with(binding) {
+                    var viewMode = PlantAndGardenPlantingsViewModel(item)
+                }
+            }
+
+        }
         binding.gardenList.adapter = adapter
 
         binding.addPlant.setOnClickListener {

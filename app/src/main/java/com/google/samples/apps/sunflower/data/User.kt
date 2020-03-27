@@ -14,14 +14,29 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.viewmodels
+package com.google.samples.apps.sunflower.data
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import android.graphics.Bitmap
+import androidx.room.*
 
-@Entity
+@Entity(tableName = "users",primaryKeys = ["user_name","user_id"]
+)
 data class User(
-        @PrimaryKey private val id: String,
+        @PrimaryKey(autoGenerate = true)
+
+        @ColumnInfo(name = "user_id")
+        private val id: String,
+        @ColumnInfo(name = "user_name")
         private val name: String,
         private val lastName: String
-)
+
+){
+
+        override fun toString() = name
+
+
+        private fun getPic(): Bitmap {
+                TODO("Not yet implemented")
+        }
+
+}

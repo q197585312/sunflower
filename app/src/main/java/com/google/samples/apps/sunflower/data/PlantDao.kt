@@ -17,10 +17,7 @@
 package com.google.samples.apps.sunflower.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 /**
  * The Data Access Object for the Plant class.
@@ -36,6 +33,15 @@ interface PlantDao {
     @Query("SELECT * FROM plants WHERE id = :plantId")
     fun getPlant(plantId: String): LiveData<Plant>
 
+    @Query("SELECT * FROM plants WHERE name LIKE :name_plant")
+    fun getByName(name_plant :String): LiveData<List<Plant>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(plants: List<Plant>)
+
+    @Delete
+    fun deleteAll(plants: List<Plant>):Int
+
+    @Update
+    fun updateAll(plants: List<Plant>):Int
 }

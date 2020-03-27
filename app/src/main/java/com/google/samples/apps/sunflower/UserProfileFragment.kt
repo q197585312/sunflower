@@ -16,8 +16,28 @@
 
 package com.google.samples.apps.sunflower
 
-import androidx.fragment.app.Fragment
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import com.google.samples.apps.sunflower.viewmodels.UserProfileViewModel
 
-class UserProfileFragment : Fragment()  {
+class UserProfileFragment : BaseFragment()  {
+    val viewModel: UserProfileViewModel by viewModels()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.user_profile_layout, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.liveUser.observe(viewLifecycleOwner)
+    }
+
+}
+
+private fun <T> LiveData<T>.observe(viewLifecycleOwner: LifecycleOwner) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 }

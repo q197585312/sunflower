@@ -37,7 +37,8 @@ data class Plant(
      * watering + watering Interval; false otherwise.
      */
     fun shouldBeWatered(since: Calendar, lastWateringDate: Calendar) =
-        since > lastWateringDate.apply { add(DAY_OF_YEAR, wateringInterval) }
+        since > lastWateringDate.apply {
+            add(DAY_OF_YEAR, wateringInterval) }
 
     override fun toString() = name
 }
